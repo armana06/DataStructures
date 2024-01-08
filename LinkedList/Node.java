@@ -2,7 +2,7 @@ package DataStructures.LinkedList;
 public class Node <T> {
         T value;
         Node<T> next;
-        Node<T> prev;
+        Node<T> prev; //this will only be used with the doubly linked list
         public Node(T v, Node<T> n) {
             value = v;
             next = n;
