@@ -28,15 +28,15 @@ public class AVL {
         add(i, root, 0);
     }
     public void add(int i, AVLNode root, int height) {
-        if(root.left == null && i > root.element) {
+        if(root.left == null && i < root.element) {
             root.left = new AVLNode(i);
             return;
         } 
-        if(root.right == null && i < root.element) {
+        if(root.right == null && i > root.element) {
             root.right = new AVLNode(i);
             return;
         }
-        if(i <= root.element) {
+        if(i > root.element) {
             add(i, root.right, height++);
         }
         else {
@@ -55,11 +55,15 @@ public class AVL {
         }
         return false;
     }
-    public AVLNode rightRotate(AVLNode root) {
-        AVLNode newRoot = root.left;
-        root.left = newRoot.right;
-        newRoot.right = root;
-        return newRoot;
+    public void rightRotate(AVLNode root) {
+        if(root.left == null) {
+            return;
+        }
+        AVLNode newRight = root;
+        AVLNode newLeft = root.left.right;
+        root = root.left;
+        root.right = newRight;
+        root.right.left = newLeft;
     }
     public AVLNode leftRotate(AVLNode root) {
         AVLNode newRoot = root.right;
@@ -90,7 +94,10 @@ public class AVL {
         test.add(6);
         test.add(2);
         test.add(8);
-        //test.rightRotate(test.root);
+        test.add(1);
+        test.add(9);
+        System.out.println(test);
+        test.rightRotate(test.root);
         System.out.println(test);
     }
 }
